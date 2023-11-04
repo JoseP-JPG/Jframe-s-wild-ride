@@ -16,12 +16,12 @@ public class Main {
 
         String windowTitle = "Quirky campaign";
 
-        Scanner myObj = new Scanner(System.in);
+        /*Scanner myObj = new Scanner(System.in);
         System.out.println("Name of window");
         String title = myObj.nextLine();
         if(!title.equals(""))
             windowTitle=title;
-        myObj.close();
+        myObj.close();*/
 
         FrameTest frame =new FrameTest(windowTitle, absolutePath.getPath());
 
