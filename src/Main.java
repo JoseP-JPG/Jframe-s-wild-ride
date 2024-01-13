@@ -1,7 +1,7 @@
-import javax.swing.*;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.URISyntaxException;
-import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,15 +15,18 @@ public class Main {
         }
 
         String windowTitle = "Quirky campaign";
+        CountDownLatch loginSignal = new CountDownLatch(1);
 
-        /*Scanner myObj = new Scanner(System.in);
-        System.out.println("Name of window");
-        String title = myObj.nextLine();
-        if(!title.equals(""))
-            windowTitle=title;
-        myObj.close();*/
+        //FrameTest frame = new FrameTest(windowTitle, absolutePath.getPath());
+        TextTest text = new TextTest(loginSignal);
 
-        FrameTest frame =new FrameTest(windowTitle, absolutePath.getPath());
+        try {
+            loginSignal.await();
+            text.dispatchEvent(new WindowEvent(text, WindowEvent.WINDOW_CLOSING));
+            System.out.println("lol");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
